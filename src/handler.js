@@ -34,22 +34,44 @@ const addBookHandler = (request, h) => {
         }).code(500);
     }
 
-    console.log(newBook);
     return h.response({
         status: "success",
         message: "Buku berhasil ditambahkan",
         data: {
-            bookId: id,
+            id: id,
         }
     }).code(201);
 };
 
-const getAllBookHandler = (request, h) => ({
+const getAllBookHandler = (request, h) => {
+    return h.response({
     status: 'success',
     data: {
         books,
     },
-});
+    }).code(200)
+};
 
+const getBookByIdHandler = (request, h) => {
+    // Mengambil id dari params
+    const { id } = request.params;
 
-module.exports = { addBookHandler, getAllBookHandler };
+    // Jika buku ditemukan
+    if (books.filter((b) => b.id === id).length > 0) {
+        // Mengambil buku yang memiliki id tersebut
+        const book = books.filter((b) => b.id === id)[0];
+        return h.response({
+            status: 'success',
+            data: {
+                book,
+            },
+        }).code(200);
+    }
+
+    return h.response({
+        status: 'fail',
+        message: 'Buku tidak ditemukan',
+    }).code(404);
+}
+
+module.exports = { addBookHandler, getAllBookHandler, getBookByIdHandler };

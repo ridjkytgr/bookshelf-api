@@ -4,11 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon ./src/server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hapi/hapi": "^20.1.2"
+    "@hapi/hapi": "^20.1.2",
+    "nodemon": "^2.0.7"
   }
 }
